@@ -85,17 +85,17 @@ Here is an example of how to verify a notification:
 app.MapPost("/verify-decode-notification", async (ISignedDataVerifier signedDataVerifier, [FromBody] ResponseBodyV2 request) =>
     {
         //First decode the notification
-        var decodedNotificaiton =  await signedDataVerifier.VerifyAndDecodeNotification(request.SignedPayload);
+        var decodedNotification =  await signedDataVerifier.VerifyAndDecodeNotification(request.SignedPayload);
         
         //Then you can decode the transaction
         JwsTransactionDecodedPayload decodedTransaction =
-            await signedDataVerifier.VerifyAndDecodeTransaction(decodedNotificaiton.Data.SignedTransactionInfo!);
+            await signedDataVerifier.VerifyAndDecodeTransaction(decodedNotification.Data.SignedTransactionInfo!);
         
         //And the renewal info
         JWSRenewalInfoDecodedPayload decodedRenewalInfo =
-            await signedDataVerifier.VerifyAndDecodeRenewalInfo(decodedNotificaiton.Data.SignedRenewalInfo!);
+            await signedDataVerifier.VerifyAndDecodeRenewalInfo(decodedNotification.Data.SignedRenewalInfo!);
         
-        return decodedNotificaiton;
+        return decodedNotification;
     })
     .WithName("VerifyAndDecodeNotification")
     .WithOpenApi();
