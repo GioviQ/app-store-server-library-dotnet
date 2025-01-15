@@ -252,7 +252,7 @@ public class SignedDataVerifier(
     /// <returns>Apple root certificate in a byte array</returns>
     private byte[] GetEmbeddedAppleRootCertificate()
     {
-        string resourceName = "AppStoreServerLibraryDotnet.AppleRootCertificate.AppleRootCA-G3.cer";
+        string resourceName = $"{GetType().Namespace}.AppleRootCertificate.AppleRootCA-G3.cer";
         using var stream = typeof(SignedDataVerifier).Assembly.GetManifestResourceStream(resourceName);
         if (stream == null)
         {
